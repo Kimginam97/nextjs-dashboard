@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import '../tic-tac-toe/style.css'
+import './style.css'
 
 type SquareProps = {
   value: string | null
