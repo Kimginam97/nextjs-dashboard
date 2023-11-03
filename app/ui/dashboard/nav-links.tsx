@@ -5,6 +5,7 @@ import {
   HomeIcon,
   DocumentDuplicateIcon,
   RectangleStackIcon,
+  Squares2X2Icon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,7 +20,16 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
-  { name: 'Tutorial', href: '/tutorial', icon: RectangleStackIcon },
+  {
+    name: 'Tic-Tac-Toe',
+    href: '/dashboard/tutorial/tic-tac-toe',
+    icon: Squares2X2Icon,
+  },
+  {
+    name: 'Think-React',
+    href: '/dashboard/tutorial/think-react',
+    icon: RectangleStackIcon,
+  },
 ]
 
 export default function NavLinks() {
