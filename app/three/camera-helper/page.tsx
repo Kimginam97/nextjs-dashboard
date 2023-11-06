@@ -61,7 +61,9 @@ const Page: React.FC = () => {
     }
   }, [fov, near, far, position, target])
 
+  //@ts-ignore
   const model = useGLTF('/models/dsg_left.glb') as any // 모델 로드
+  //@ts-ignore
   const model1 = useGLTF('/models/dsg_right.glb') as any // 모델 로드
 
   return (
