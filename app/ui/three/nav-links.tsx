@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  HomeIcon,
-  RectangleStackIcon,
-  Squares2X2Icon,
-  MapIcon,
-} from '@heroicons/react/24/outline'
+import { HomeIcon, MapIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
@@ -14,14 +9,9 @@ import clsx from 'clsx'
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   {
-    name: 'Tic-Tac-Toe',
-    href: '/tutorial/tic-tac-toe',
-    icon: Squares2X2Icon,
-  },
-  {
-    name: 'Think-React',
-    href: '/tutorial/think-react',
-    icon: RectangleStackIcon,
+    name: 'Navigation',
+    href: '/three/navigation',
+    icon: MapIcon,
   },
 ]
 

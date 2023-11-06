@@ -5,6 +5,7 @@ import {
   HomeIcon,
   DocumentDuplicateIcon,
   PencilIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -14,6 +15,7 @@ import clsx from 'clsx'
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
   { name: 'Tutorial', href: '/tutorial', icon: PencilIcon },
+  { name: 'Three', href: '/three', icon: Square3Stack3DIcon },
   {
     name: 'Invoices',
     href: '/dashboard/invoices',
