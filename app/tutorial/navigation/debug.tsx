@@ -1,0 +1,119 @@
+import { useFrame } from '@react-three/fiber'
+import {
+  Crowd,
+  NavMesh,
+  OffMeshConnectionParams,
+  TileCache,
+} from '@recast-navigation/core'
+import {
+  CrowdHelper,
+  NavMeshHelper,
+  TileCacheHelper,
+} from '@recast-navigation/three'
+
+import React, { useEffect, useMemo } from 'react'
+import { Material } from 'three'
+import { OffMeshConnectionsHelper } from './off-mesh-connections-helper'
+
+export type DebugProps = {
+  autoUpdate?: boolean
+  navMesh?: NavMesh
+  navMeshMaterial?: Material
+  tileCache?: TileCache
+  obstacleMaterial?: Material
+  crowd?: Crowd
+  agentMaterial?: Material
+  offMeshConnections?: OffMeshConnectionParams[]
+}
+
+export const Debug = ({
+  autoUpdate,
+  navMesh,
+  navMeshMaterial,
+  tileCache,
+  obstacleMaterial,
+  crowd,
+  agentMaterial,
+  offMeshConnections,
+}: DebugProps) => {
+  const navMeshHelper = useMemo(() => {
+    if (!navMesh) return null
+
+    return new NavMeshHelper({
+      navMesh,
+      navMeshMaterial,
+    })
+  }, [navMesh, navMeshMaterial])
+
+  const tileCacheHelper = useMemo(() => {
+    if (!tileCache) return null
+
+    return new TileCacheHelper({
+      tileCache,
+      obstacleMaterial,
+    })
+  }, [tileCache, obstacleMaterial])
+
+  const crowdHelper = useMemo(() => {
+    if (!crowd) return null
+
+    return new CrowdHelper({
+      crowd,
+      agentMaterial,
+    })
+  }, [crowd, agentMaterial])
+
+  const offMeshConnectionsHelper = useMemo(() => {
+    if (!offMeshConnections) return null
+
+    return new OffMeshConnectionsHelper({
+      offMeshConnections,
+    })
+  }, [offMeshConnections])
+
+  useFrame(() => {
+    if (crowdHelper) {
+      crowdHelper.update()
+    }
+  })
+
+  useEffect(() => {
+    if (!navMeshHelper || !autoUpdate) return
+
+    const interval = setInterval(() => {
+      navMeshHelper.update()
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [navMeshHelper])
+
+  useEffect(() => {
+    if (!tileCacheHelper || !autoUpdate) return
+
+    const interval = setInterval(() => {
+      tileCacheHelper.update()
+    }, 100)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [tileCacheHelper])
+
+  return (
+    <>
+      {navMeshHelper && <primitive object={navMeshHelper} />}
+
+      <group position={[0, 0.01, 0]}>
+        {tileCacheHelper && <primitive object={tileCacheHelper} />}
+      </group>
+
+      {crowdHelper && <primitive object={crowdHelper} />}
+
+      {offMeshConnectionsHelper && (
+        <primitive object={offMeshConnectionsHelper} />
+      )}
+    </>
+  )
+}
