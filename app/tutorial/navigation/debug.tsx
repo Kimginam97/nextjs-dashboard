@@ -15,6 +15,18 @@ import React, { useEffect, useMemo } from 'react'
 import { Material } from 'three'
 import { OffMeshConnectionsHelper } from './off-mesh-connections-helper'
 
+/**
+ * autoUpdate: 자동 업데이트 여부를 설정합니다.
+ * navMesh: 네비게이션 메시 객체.
+ * navMeshMaterial: 네비게이션 메시를 시각화하는 데 사용할 재질.
+ * tileCache: 타일 캐시 객체.
+ * obstacleMaterial: 장애물을 시각화하는 데 사용할 재질.
+ * crowd: 크라우드 객체.
+ * agentMaterial: 크라우드 에이전트를 시각화하는 데 사용할 재질.
+ *
+ * navMeshHelper, tileCacheHelper, crowdHelper
+ * 네비게이션 메시, 타일 캐시, 크라우드를 시각적으로 나타내기 위한 도우미 클래스
+ */
 export type DebugProps = {
   autoUpdate?: boolean
   navMesh?: NavMesh

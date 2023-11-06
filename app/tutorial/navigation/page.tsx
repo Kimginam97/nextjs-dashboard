@@ -3,16 +3,23 @@ import * as THREE from 'three'
 import React, { useEffect, useState } from 'react'
 import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber'
 import { Environment, Line, OrbitControls, useGLTF } from '@react-three/drei'
-import { Crowd, CrowdAgent, NavMeshQuery, init } from 'recast-navigation'
+import {
+  Crowd,
+  CrowdAgent,
+  NavMeshQuery,
+  OffMeshConnectionParams,
+  init,
+} from 'recast-navigation'
 import { threeToSoloNavMesh } from 'recast-navigation/three'
 import { suspend } from 'suspend-react'
 import { Mesh } from 'three'
 import { Perf } from 'r3f-perf'
-import './style.css'
 import { GLTF } from 'three-stdlib'
 import { Debug } from './debug'
+import './style.css'
 
 const assetUrl = '/models/nav_test.glb'
+// const assetUrl = '/models/dungeon.gltf'
 
 const NavTestEnvirionment = () => {
   const gltf = useGLTF(assetUrl) as GLTF
@@ -25,6 +32,56 @@ useGLTF.preload(assetUrl)
 const agentMaterial = new THREE.MeshStandardMaterial({
   color: 'red',
 })
+
+const offMeshConnectionDefaults = {
+  radius: 0.3,
+  area: 0,
+  flags: 1,
+  bidirectional: false,
+}
+
+const offMeshConnections: OffMeshConnectionParams[] = [
+  {
+    ...offMeshConnectionDefaults,
+    startPosition: {
+      x: 4.501361846923828,
+      y: 0.36645400524139404,
+      z: 2.227370500564575,
+    },
+    endPosition: {
+      x: 6.453944206237793,
+      y: 0.4996081590652466,
+      z: 1.6987327337265015,
+    },
+    bidirectional: true,
+  },
+  {
+    ...offMeshConnectionDefaults,
+    startPosition: {
+      x: 0.2870096266269684,
+      y: 3.9292590618133545,
+      z: 2.564833402633667,
+    },
+    endPosition: {
+      x: 1.4627689123153687,
+      y: 2.778116226196289,
+      z: 3.5469906330108643,
+    },
+  },
+  {
+    ...offMeshConnectionDefaults,
+    startPosition: {
+      x: 3.5109636783599854,
+      y: 3.1664540767669678,
+      z: 2.893442392349243,
+    },
+    endPosition: {
+      x: 3.669801950454712,
+      y: 0.36645400524139404,
+      z: 2.135521173477173,
+    },
+  },
+]
 
 const NavMesh = ({ children }: { children: any }) => {
   const [group, setGroup] = useState<THREE.Group | null>(null)
@@ -54,7 +111,7 @@ const NavMesh = ({ children }: { children: any }) => {
     const { success, navMesh } = threeToSoloNavMesh(meshes, {
       cs: cellSize,
       ch: 0.2,
-      walkableRadius: Math.ceil(agentRadius / cellSize),
+      offMeshConnections,
     })
 
     if (!success) return
@@ -68,8 +125,8 @@ const NavMesh = ({ children }: { children: any }) => {
       {
         radius: agentRadius,
         height: 0.5,
-        maxAcceleration: 4.0,
-        maxSpeed: 1.0,
+        maxAcceleration: 2.0,
+        maxSpeed: 2.0,
         collisionQueryRange: 0.5,
         pathOptimizationRange: 0.0,
       }
@@ -159,7 +216,12 @@ const NavMesh = ({ children }: { children: any }) => {
       <group onPointerDown={onClick}>
         <group ref={setGroup}>{children}</group>
 
-        <Debug navMesh={navMesh} crowd={crowd} agentMaterial={agentMaterial} />
+        <Debug
+          navMesh={navMesh}
+          crowd={crowd}
+          agentMaterial={agentMaterial}
+          offMeshConnections={offMeshConnections}
+        />
       </group>
 
       {agentPath && <Line points={agentPath} color="blue" lineWidth={10} />}
