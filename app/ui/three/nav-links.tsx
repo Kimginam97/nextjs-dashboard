@@ -1,6 +1,6 @@
 'use client'
 
-import { HomeIcon, MapIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, MapIcon, VideoCameraIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
@@ -12,6 +12,11 @@ const links = [
     name: 'Navigation',
     href: '/three/navigation',
     icon: MapIcon,
+  },
+  {
+    name: 'CameraHelper',
+    href: '/three/camera-helper',
+    icon: VideoCameraIcon,
   },
 ]
 
