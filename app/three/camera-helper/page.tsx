@@ -1,11 +1,10 @@
 'use client'
 import * as THREE from 'three'
 import React, { useEffect, useRef } from 'react'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
-import { GLTFLoader } from 'three-stdlib'
 
 const CameraScene = ({ model }: { model: any }) => {
   return (
@@ -41,10 +40,10 @@ const Page: React.FC = () => {
   const sharedCamera = useRef<THREE.PerspectiveCamera | null>(null)
   const { fov, position, near, far, target } = useControls('Camera folder', {
     fov: { value: 75, min: 0, max: 150 },
-    position: [25, 76, 15],
+    position: [20, 76, 0],
     near: { value: 70, min: 1, max: 1000 },
     far: { value: 80, min: 10, max: 1000 },
-    target: [25, 0, 15],
+    target: [20, 0, 0],
   })
 
   if (!sharedCamera.current) {
@@ -71,7 +70,7 @@ const Page: React.FC = () => {
         <h3 className="text-yellow-50">Main Camera View</h3>
         <Canvas camera={sharedCamera.current!}>
           <Environment preset="city" />
-          <CameraScene model={model} />
+          <CameraScene model={model} /> {/* 모델을 전달 */}
           <Perf position="bottom-left" />
           <axesHelper args={[50]} />
           <gridHelper args={[100]} />
@@ -81,7 +80,7 @@ const Page: React.FC = () => {
         <h3 className="text-yellow-50">Camera Helper View</h3>
         <Canvas camera={{ position: [80, 80, 80] }}>
           <Environment preset="city" />
-          <CameraScene model={model1} />
+          <CameraScene model={model1} /> {/* 모델을 전달 */}
           <CameraHelperScene camera={sharedCamera.current!} />
           <OrbitControls />
           <Perf position="bottom-right" />
@@ -94,3 +93,6 @@ const Page: React.FC = () => {
 }
 
 export default Page
+
+useGLTF.preload('/models/dsg_left.gltf')
+useGLTF.preload('/models/dsg_right.gltf')
