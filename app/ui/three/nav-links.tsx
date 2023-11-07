@@ -4,7 +4,7 @@ import {
   HomeIcon,
   MapIcon,
   VideoCameraIcon,
-  TableCellsIcon,
+  TrophyIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -22,6 +22,11 @@ const links = [
     name: 'CameraHelper',
     href: '/three/camera-helper',
     icon: VideoCameraIcon,
+  },
+  {
+    name: 'Physics-Debug',
+    href: '/three/physics-debug',
+    icon: TrophyIcon,
   },
 ]
 

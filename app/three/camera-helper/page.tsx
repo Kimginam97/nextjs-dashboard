@@ -62,8 +62,8 @@ const Page: React.FC = () => {
     }
   }, [fov, near, far, position, target])
 
-  const model = useGLTF('/models/dsg_left.glb') as any // 모델 로드
-  const model1 = useGLTF('/models/dsg_right.glb') as any // 모델 로드
+  // const model = useGLTF('/models/dsg_left.glb') as any // 모델 로드
+  // const model1 = useGLTF('/models/dsg_right.glb') as any // 모델 로드
 
   return (
     <div style={{ display: 'flex' }} className="h-screen">
@@ -71,7 +71,7 @@ const Page: React.FC = () => {
         <h3 className="text-yellow-50">Main Camera View</h3>
         <Canvas camera={sharedCamera.current!}>
           <Environment preset="city" />
-          <CameraScene model={model} /> {/* 모델을 전달 */}
+          {/* <CameraScene model={model} /> 모델을 전달 */}
           <Perf position="bottom-left" />
           <axesHelper args={[50]} />
           <gridHelper args={[100]} />
@@ -81,7 +81,7 @@ const Page: React.FC = () => {
         <h3 className="text-yellow-50">Camera Helper View</h3>
         <Canvas camera={{ position: [80, 80, 80] }}>
           <Environment preset="city" />
-          <CameraScene model={model1} /> {/* 모델을 전달 */}
+          {/* <CameraScene model={model1} /> 모델을 전달 */}
           <CameraHelperScene camera={sharedCamera.current!} />
           <OrbitControls />
           <Perf position="bottom-right" />

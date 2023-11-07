@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.88.11",
     "@react-three/fiber": "^8.15.9",
     "@recast-navigation/core": "^0.13.3",

@@ -235,7 +235,7 @@ const Page: React.FC = () => {
   suspend(() => init(), [])
 
   return (
-    <Canvas camera={{ position: [5, 5, 5] }}>
+    <Canvas camera={{ position: [-4, 4, 4] }}>
       <Environment preset="city" />
       <NavMesh>
         <NavTestEnvirionment />
