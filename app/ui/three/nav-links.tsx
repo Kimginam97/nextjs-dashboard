@@ -5,6 +5,8 @@ import {
   MapIcon,
   VideoCameraIcon,
   TrophyIcon,
+  ClipboardIcon,
+  GifIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -27,6 +29,16 @@ const links = [
     name: 'Physics-Debug',
     href: '/three/physics-debug',
     icon: TrophyIcon,
+  },
+  {
+    name: 'Gltf-Loader',
+    href: '/three/gltf-loader',
+    icon: GifIcon,
+  },
+  {
+    name: 'Gltf-Animations',
+    href: '/three/animations',
+    icon: ClipboardIcon,
   },
 ]
 
