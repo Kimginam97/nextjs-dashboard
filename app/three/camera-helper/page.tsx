@@ -1,10 +1,11 @@
 'use client'
 import * as THREE from 'three'
 import React, { useEffect, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
+import { GLTFLoader } from 'three-stdlib'
 
 const CameraScene = ({ model }: { model: any }) => {
   return (
@@ -61,9 +62,7 @@ const Page: React.FC = () => {
     }
   }, [fov, near, far, position, target])
 
-  //@ts-ignore
   const model = useGLTF('/models/dsg_left.glb') as any // 모델 로드
-  //@ts-ignore
   const model1 = useGLTF('/models/dsg_right.glb') as any // 모델 로드
 
   return (
